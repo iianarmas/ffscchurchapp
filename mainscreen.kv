@@ -1,0 +1,325 @@
+#:import Clock kivy.clock.Clock
+
+# COLORS: 
+#:set off_white 249/255, 250/255, 251/255, 1
+#:set purple 93/255, 21/255, 254/255, 1
+#:set yellow 254/255,215/255, 46/255,1
+#:set yellow_text 176/255, 99/255, 1/255, 1
+#:set light_blue 21/255, 182/255, 254/255, 1
+#:set subtext_color 78/255, 78/255, 78/255, 1
+#:set black 25/255, 25/255, 25/255, 1
+#:set black_secondary 50/255, 50/255, 50/255, 0.8
+
+<PreSplashScreen>:
+    id: pre_splash
+    on_enter: Clock.schedule_once(self.login_screen_call, 3)
+        
+    MDLabel:
+        text: 'Wait'
+        halign: 'center'
+
+<LoginScreen>:
+    id: login_screen
+    MDFloatLayout:
+        MDRaisedButton:
+            text: 'Enter'
+            font_style: 'Button'
+            md_bg_color: purple
+            size_hint_x: 0.4
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_release: root.on_enter_button()
+
+
+<HomeScreen>:
+    id: home_screen
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        MDToolbar:
+            id: home_toolbar
+            title: 'Scheduler'
+            text: 'hello'
+            md_bg_color: purple
+            right_action_items: [['dots-vertical']]
+            elevation: 10
+
+
+        ScrollView:
+            MDBoxLayout:
+                orientation:'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                md_bg_color: off_white
+ 
+                # Welcome Panel
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDGridLayout:
+                        cols: 2
+                        rows: 2
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: '36dp'
+                        padding: ('24dp','36dp','24dp','24dp')
+                        MDLabel:
+                            text: '[b]Welcome Iian![/b]'
+                            markup: True
+                            font_style: 'H4'
+                            size_hint_x: 2.5
+                        MDLabel:
+                            text: '[b]ADMIN[/b]'
+                            markup: True
+                            font_style: 'H5'
+                            halign: 'right'
+                            theme_text_color: 'Custom'
+                            text_color: purple
+                        MDRelativeLayout:
+                            pos_hint: {'x': 1, 'top': 1}
+                            MDLabel:
+                                text: 'Ministry Worker'
+                                font_size: '18sp'
+                                valign: 'top'
+
+                # Goals Panel
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: root.height * 0.18
+                    padding: ('0dp', '12dp', '0dp', '0dp')
+                    canvas.before:
+                        Color:
+                            rgba: yellow
+                        RoundedRectangle:
+                            size: self.width, self.height * 0.85
+                            pos: 54, self.y
+                            radius: [56,]
+                        Color:
+                            #rgba: 1,1,0,1
+                        Rectangle:
+                            size: self.height * 1.3, self.height * 1.05
+                            pos: root.width / 1.6, self.y
+                            source: 'images/notebook-crop.png'
+                    MDBoxLayout:
+                        size_hint_x: 0.35
+                    MDBoxLayout:
+                        size_hint_x: 0.55
+                        MDIconButton:
+                            icon: 'chevron-right-circle'
+                            theme_text_color: 'Custom'
+                            text_color: black
+                            pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: ('4dp', '12dp', '24dp', '12dp')
+                        spacing: '4dp'
+                        size_hint_x: 3
+
+                        MDLabel:
+                            text: "[b]OUR GOAL THIS MONTH[/b]"
+                            markup: True
+                            theme_text_color: 'Custom'
+                            text_color: yellow_text
+                            text_size: self.size
+                            font_size: '16sp'
+                            valign: 'bottom'
+
+                        MDLabel:
+                            text: '"Let us work together in strengthening our faith."'
+                            text_size: self.size
+                            theme_text_color: 'Custom'
+                            text_color: yellow_text
+                            font_size: '14sp'
+                            valign: 'top'
+                    MDBoxLayout:
+                        size_hint_x: 1.5
+                
+                # Schedule Label
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: ('24dp', '36dp', '24dp', '12dp')
+                    MDLabel:
+                        text: '[b]Latest Schedules[/b]'
+                        markup: True
+                        font_style: 'H5'
+
+                # Schedule Panel
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: ('24dp', '12dp', '24dp', '16dp')
+                    spacing: '8dp'
+                    size_hint_y: None
+                    height: root.height * 0.48
+                    MainScheduleCard:
+                    OutreachScheduleCard:
+                    EventScheduleCard:
+                        
+                # Announcement Label
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: ('24dp', '36dp', '24dp', '12dp')
+                    MDLabel:
+                        text: '[b]Announcements[/b]'
+                        markup: True
+                        font_style: 'H5'
+
+                
+                # Announcements Panel
+                MDBoxLayout:
+                    padding: ('24dp', '12dp', '24dp', '16dp')
+                    
+                    size_hint_y: None
+                    height: root.height * 0.3
+                    MDCard:
+                        orientation: 'vertical'
+                        md_bg_color: purple
+                        spacing: '12dp'
+                        radius: [56,]
+
+                        MDLabel:
+                            text: '[b]TITLE GOES HERE[/b]'
+                            markup: True
+                            font_style: 'H4'
+                            halign: 'center'
+                            theme_text_color: 'Custom'
+                            text_color: 1,1,1,1
+                            text_size: self.size
+                        MDLabel:
+                            text: 'Announcements will be posted here. Note, only one announcement can be posted per time.'
+                            halign: 'center'
+                            valign: 'top'
+                            theme_text_color: 'Custom'
+                            text_color: 1,1,1,1
+                            text_size: self.size
+
+                # Memory Verse Label
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: ('24dp', '36dp', '24dp', '12dp')
+                    MDLabel:
+                        text: '[b]Memory Verse[/b]'
+                        markup: True
+                        font_style: 'H5'
+
+
+                # Memory Verse Panel
+                MDBoxLayout:
+                    padding: ('24dp', '16dp', '24dp', '8dp')
+                    size_hint_y: None
+                    height: root.height * 0.3
+                    MDCard:
+                        radius: [56,]
+                        MDBoxLayout:
+                            MDBoxLayout:
+                                padding: '24dp'
+                                Image:
+                                    source: 'images/bible.png'
+
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                size_hint_x: 1.5
+                                padding: '24dp'
+                                
+                                MDLabel:
+                                    text:'[i][b]John 3:16[/b]\n \n"For God so loved the world that He gave His only begotten Son, that whosoever believeth in Him shall not perish but have everlasting life."[/i]'
+                                    font_size: '16sp'
+                                    halign: 'center'
+                                    markup: True
+
+<MainScheduleCard@MDCard>:
+    size_hint_y: 0.3
+    elevation: 0
+    canvas.after:
+        Color:
+            rgba: light_blue
+        Rectangle:
+            size: dp(8), self.height
+            pos: self.width + dp(14), self.y
+
+    FitImage:
+        size_hint_x: 0.5
+        source: 'images/ffsc_cover.jpg'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: ('24dp', '8dp', '24dp', '8dp')
+        MDLabel:
+            text: '[b]MAIN[/b]'
+            font_size: '24sp'
+            valign: 'bottom'
+            text_size: self.size
+            markup: True
+        MDLabel:
+            text: '"Short topic titles here. Like faith, hope, and love"'
+            valign: 'middle'
+            text_size: self.size
+            font_size: '16sp'
+            theme_text_color: 'Custom'
+            text_color: subtext_color
+            size_hint_y: 2
+
+
+<OutreachScheduleCard@MDCard>:
+    size_hint_y: 0.3
+    elevation: 0
+    canvas.after:
+        Color:
+            rgba: purple
+        Rectangle:
+            size: dp(8), self.height
+            pos: self.width + dp(14), self.y
+    FitImage:
+        size_hint_x: 0.5
+        source: 'images/cobol_cover.jpeg'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: ('24dp', '8dp', '24dp', '8dp')
+        MDLabel:
+            text: '[b]OUTREACHES[/b]'
+            font_size: '24sp'
+            valign: 'bottom'
+            text_size: self.size
+            markup: True
+        MDLabel:
+            text: 'Outreach services are currently available in Cobol and Malacañang.'
+            valign: 'middle'
+            text_size: self.size
+            font_size: '16sp'
+            theme_text_color: 'Custom'
+            text_color: subtext_color
+
+            size_hint_y: 2
+        
+
+<EventScheduleCard@MDCard>:
+    size_hint_y: 0.3
+    elevation: 0
+    canvas.after:
+        Color:
+            rgba: yellow
+        Rectangle:
+            size: dp(8), self.height
+            pos: self.width + dp(14), self.y
+    FitImage:
+        size_hint_x: 0.5
+        source: 'images/events_cover.jpg'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: ('24dp', '8dp', '24dp', '8dp')
+        MDLabel:
+            text: '[b]EVENTS[/b]'
+            font_size: '24sp'
+            valign: 'bottom'
+            text_size: self.size
+            markup: True
+        MDLabel:
+            text: "Click here to see all our church's events and activities this month."
+            valign: 'middle'
+            text_size: self.size
+            font_size: '16sp'
+            theme_text_color: 'Custom'
+            text_color: subtext_color
+            size_hint_y: 2
